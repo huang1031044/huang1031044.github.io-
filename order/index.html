@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>老黃在日雜貨店・下單表單</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input[type="text"], input[type="number"], select { width: 100%; padding: 8px; margin-top: 4px; }
+    .quantity-control { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .quantity-control button { padding: 6px 12px; }
+    .quantity-control input { width: 50px; text-align: center; }
+    .submit-btn { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    .back-home { margin-top: 20px; display: inline-block; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>🛒 老黃在日雜貨店・下單頁</h1>
+
+  <a class="back-home" href="https://huang1031044.github.io/">← 回到老黃在日雜貨店首頁</a>
+
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSfXrC6gOqsmQH7FeaXscLEa4HctYaZBP4ROvGbxi4ZikdP3yg/formResponse" method="POST" target="_blank">
+
+    <label for="name">收件人姓名</label>
+    <input type="text" name="entry.0000000000" id="name" required />
+
+    <label for="item">商品名稱（編號）</label>
+    <input type="text" name="entry.1234567890" id="item" required />
+
+    <label>數量</label>
+    <div class="quantity-control">
+      <button type="button" onclick="adjustQuantity(-1)">－</button>
+      <input type="number" name="entry.1111111111" id="quantity" value="1" min="1" max="9" readonly />
+      <button type="button" onclick="adjustQuantity(1)">＋</button>
+    </div>
+
+    <label>郵遞區號</label>
+    <div style="display: flex; gap: 10px;">
+      <input type="text" name="entry.2222222222" maxlength="3" placeholder="例：123" required />
+      <input type="text" name="entry.3333333333" maxlength="2" placeholder="例：45" required />
+    </div>
+
+    <label for="address">收件人住址</label>
+    <input type="text" name="entry.6666666666" id="address" required />
+
+    <label>配送方式</label>
+    <select name="entry.4444444444" required>
+      <option value="">請選擇</option>
+      <option value="黑貓宅配">黑貓宅配</option>
+      <option value="郵局寄送">郵局寄送</option>
+      <option value="東京自取">東京自取</option>
+      <option value="埼玉自取">埼玉自取</option>
+    </select>
+
+    <label>付款方式</label>
+    <select name="entry.5555555555" required>
+      <option value="">請選擇</option>
+      <option value="現金付款">現金付款</option>
+      <option value="轉帳付款">轉帳付款</option>
+      <option value="PayPay">PayPay</option>
+    </select>
+
+    <button type="submit" class="submit-btn">送出訂單</button>
+  </form>
+
+  <script>
+    function adjustQuantity(amount) {
+      const qtyInput = document.getElementById("quantity");
+      let current = parseInt(qtyInput.value);
+      let next = current + amount;
+      if (next >= 1 && next <= 9) {
+        qtyInput.value = next;
+      }
+    }
+  </script>
+</body>
+</html>
